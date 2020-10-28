@@ -34,7 +34,7 @@ npx ws-launch
 If you want any other data, you can pass arguments like;
 
 ```
-npm start -- --port=5000 --data=./test.json
+npm start -- --port=5000 --data=test.json
 ```
 
 ### Inline data
@@ -46,5 +46,7 @@ npx ws-launch --data="{}"
 ```
 
 Your json needs to be stringified and escaped.
+
+### Converter
 
 <iframe src="docs/convert.html" style="width: 100%; height: 50vh; min-height: 320px; border: none;"></iframe>
