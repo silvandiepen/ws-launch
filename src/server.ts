@@ -7,9 +7,10 @@ import { Arguments } from "./types";
 const argv: Arguments = yargs.options({
   port: { type: "number", default: 4000 },
   wait: { type: "number", default: 5000 },
-  data: { type: "string", default: "./data.js" },
+  data: { type: "string", default: "", required: true },
   url: { type: "string", default: "" },
 }).argv;
+
 
 import {
   START,
@@ -41,11 +42,13 @@ hello()
     BLOCK_LINE("Waiting for connection....", { ...ls, newLine: false })
   );
 
-
-const dataUrl = resolve(join(process.cwd(),argv.data)) || resolve(join(__dirname,argv.data);
-
-let data = require(dataUrl);
-if (!argv.data) data = data.test;
+let data = {}
+if(argv.data){ 
+  const dataUrl = resolve(join(process.cwd(),argv.data)) || resolve(join(__dirname,argv.data);
+  data = require(dataUrl);
+} else {
+  data = { content: "No data url given" };
+}
 
 var WebSocketServer = require("ws").Server,
   wss = new WebSocketServer({ port: argv.port });

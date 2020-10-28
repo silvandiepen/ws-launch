@@ -36,7 +36,7 @@ var path_1 = require("path");
 var argv = yargs.options({
     port: { type: "number", default: 4000 },
     wait: { type: "number", default: 5000 },
-    data: { type: "string", default: "./data.js" },
+    data: { type: "string", default: "", required: true },
     url: { type: "string", default: "" },
 }).argv;
 var cli_block_1 = require("cli-block");
@@ -54,10 +54,14 @@ cli_block_1.hello()
     .then(function () {
     return cli_block_1.BLOCK_LINE("Waiting for connection....", __assign(__assign({}, ls), { newLine: false }));
 });
-var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) || path_1.resolve(path_1.join(__dirname, argv.data));
-var data = require(dataUrl);
-if (!argv.data)
-    data = data.test;
+var data = {};
+if (argv.data) {
+    var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) || path_1.resolve(path_1.join(__dirname, argv.data));
+    data = require(dataUrl);
+}
+else {
+    data = { content: "No data url given" };
+}
 var WebSocketServer = require("ws").Server, wss = new WebSocketServer({ port: argv.port });
 wss.on("connection", function (ws) {
     cli_block_1.hello()
