@@ -1,106 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convert</title>
     <style>
-        body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-* {
-  box-sizing: border-box;
-}
-.container {
-  display: flex;
-}
-.input,
-.output {
-  width: 50%;
-  display: block;
-  height: 100vh;
-  position: relative;
-}
-.input h3,
-.output h3 {
-  position: absolute;
-  padding: 1em;
-  left: 0;
-  bottom: 0;
-  opacity: 0.5;
-  margin: 0;
-  font-family: inherit;
-}
-@media screen and (max-width: 720px) {
-  .container {
-    flex-direction: column;
-  }
-  .input,
-  .output {
-    width: 100%;
-    height: 50vh;
-  }
-}
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+      }
+      .input,
+      .output {
+        width: 50%;
+        display: block;
+        height: 100vh;
+        position: relative;
+      }
+      .input h3,
+      .output h3 {
+        position: absolute;
+        padding: 1em;
+        left: 0;
+        bottom: 0;
+        opacity: 0.5;
+        margin: 0;
+        font-family: inherit;
+      }
+      @media screen and (max-width: 720px) {
+        .container {
+          flex-direction: column;
+        }
+        .input,
+        .output {
+          width: 100%;
+          height: 50vh;
+        }
+      }
 
-.input textarea {
-  width: 100%;
-  height: 100%;
-  padding: 4vw;
-  border: none;
-  resize: none;
-  font-family: monospace;
-  font-size: 1em;
-}
-.input textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 1em #f7f7f7 inset;
-}
+      .input textarea {
+        width: 100%;
+        height: 100%;
+        padding: 4vw;
+        border: none;
+        resize: none;
+        font-family: monospace;
+        font-size: 1em;
+      }
+      .input textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 1em #f7f7f7 inset;
+      }
 
-.output {
-  background-color: #f7f7f7;
-  padding: 4vw;
-}
-.output div {
-  font-family: monospace;
-  font-size: 1em;
-}
+      .output {
+        background-color: #f7f7f7;
+        padding: 4vw;
+      }
+      .output button {
+        position: absolute;
+        right: 4vw;
+        top: 4vw;
+        padding: 0.5em;
+        border: 1px solid currentColor;
+        color: currentColor;
+        background-color: white;
+      }
+      .output input {
+        width: 0;
+        height: 0;
+        position: absolute;
+        opacity: 0;
+        border: 1px solid red;
+      }
+
+      .output div {
+        font-family: monospace;
+        font-size: 1em;
+      }
     </style>
-</head>
-<body>
-    <div id="app" class="container" style="display: flex;">
-        <div class="input">
-          <h3>Input JSON</h3>
-          <textarea v-model="inputSource"></textarea>
-        </div>
-    
-        <div class="output">
-          <h3>Output String</h3>
-          <div class="error" v-if="!output">
-               Not valid json
-          </div>
-          <div v-else>
-            "{{ output }}"
-          </div>
-         </div>
+  </head>
+  <body>
+    <div id="app" class="container" style="display: flex">
+      <div class="input">
+        <h3>Input JSON</h3>
+        <textarea v-model="inputSource"></textarea>
       </div>
+
+      <div class="output">
+        <h3>Output String</h3>
+        <div class="error" v-if="!output">Not valid json</div>
+        <div v-else>
+          {{output}}
+          <button @click="copy" v-if="copied">Copied</button>
+          <button @click="copy" v-else>Copy</button>
+          <input type="text" id="copy-ref" :value="output" />
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-  var app = new Vue({
-    el: "#app",
-    data() {
-    return {
-      inputSource: "{\n\t\"type\":\"Match\",\n\t\"id\":1167689,\n\t\"name\":\"Test\"\n}",
-    };
-  },
-  computed: {
-    output(){
-       return JSON.stringify(JSON.parse(this.inputSource)).replace(/"/g, '\\"');
-    }
-  }
-  });
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            copied: false,
+            inputSource:
+              '{\n\t"type":"Match",\n\t"id":1167689,\n\t"name":"Test"\n}',
+          };
+        },
+        computed: {
+          output() {
+            return `"${JSON.stringify(JSON.parse(this.inputSource)).replace(
+              /"/g,
+              '\\"'
+            )}"`;
+          },
+        },
+        watch: {
+          output: {
+            handler() {
+              this.copied = false;
+            },
+          },
+        },
+        methods: {
+          copy() {
+            var copyText = document.getElementById("copy-ref");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            /* Alert the copied text */
+            this.copied = true;
+          },
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
