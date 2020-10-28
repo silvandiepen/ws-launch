@@ -36,7 +36,8 @@ var path_1 = require("path");
 var argv = yargs.options({
     port: { type: "number", default: 4000 },
     wait: { type: "number", default: 5000 },
-    data: { type: "string", default: "", required: true },
+    data: { type: "string", default: "" },
+    file: { type: "string", default: "" },
     url: { type: "string", default: "" },
 }).argv;
 var cli_block_1 = require("cli-block");
@@ -55,10 +56,15 @@ cli_block_1.hello()
     return cli_block_1.BLOCK_LINE("Waiting for connection....", __assign(__assign({}, ls), { newLine: false }));
 });
 var data = {};
-if (argv.data) {
-    var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) ||
-        path_1.resolve(path_1.join(__dirname, argv.data));
+if (argv.file) {
+    var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.file)) ||
+        path_1.resolve(path_1.join(__dirname, argv.file));
     data = require(dataUrl);
+}
+else if (argv.data) {
+    // data = argv.data;
+    // console.log(argv.data);
+    data = JSON.parse(argv.data);
 }
 else {
     data = { content: "No data url given" };

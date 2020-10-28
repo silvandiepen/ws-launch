@@ -4,4 +4,5 @@ export interface Arguments {
   wait: number;
   data: string;
   url: string;
+  file: string;
 }

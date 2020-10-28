@@ -7,7 +7,8 @@ import { Arguments } from "./types";
 const argv: Arguments = yargs.options({
   port: { type: "number", default: 4000 },
   wait: { type: "number", default: 5000 },
-  data: { type: "string", default: "", required: true },
+  data: { type: "string", default: "" },
+  file: { type: "string", default: "" },
   url: { type: "string", default: "" },
 }).argv;
 
@@ -42,11 +43,15 @@ hello()
   );
 
 let data = {};
-if (argv.data) {
+if (argv.file) {
   const dataUrl =
-    resolve(join(process.cwd(), argv.data)) ||
-    resolve(join(__dirname, argv.data));
+    resolve(join(process.cwd(), argv.file)) ||
+    resolve(join(__dirname, argv.file));
   data = require(dataUrl);
+} else if (argv.data) {
+  // data = argv.data;
+  // console.log(argv.data);
+  data = JSON.parse(argv.data);
 } else {
   data = { content: "No data url given" };
 }
