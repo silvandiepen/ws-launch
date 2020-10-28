@@ -11,7 +11,6 @@ const argv: Arguments = yargs.options({
   url: { type: "string", default: "" },
 }).argv;
 
-
 import {
   START,
   BLOCK_START,
@@ -42,9 +41,11 @@ hello()
     BLOCK_LINE("Waiting for connection....", { ...ls, newLine: false })
   );
 
-let data = {}
-if(argv.data){ 
-  const dataUrl = resolve(join(process.cwd(),argv.data)) || resolve(join(__dirname,argv.data);
+let data = {};
+if (argv.data) {
+  const dataUrl =
+    resolve(join(process.cwd(), argv.data)) ||
+    resolve(join(__dirname, argv.data));
   data = require(dataUrl);
 } else {
   data = { content: "No data url given" };

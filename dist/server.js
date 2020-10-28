@@ -56,7 +56,8 @@ cli_block_1.hello()
 });
 var data = {};
 if (argv.data) {
-    var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) || path_1.resolve(path_1.join(__dirname, argv.data));
+    var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) ||
+        path_1.resolve(path_1.join(__dirname, argv.data));
     data = require(dataUrl);
 }
 else {
