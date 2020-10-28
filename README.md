@@ -1,4 +1,6 @@
-# Web Socket Mock Server
+# WS Launch
+
+A Web Socket Mock data launcher
 
 ### Installation
 
@@ -14,18 +16,35 @@ npm install
 npm start
 ```
 
+or with npx;
+
+```
+npx ws-launch
+```
+
 ### Settings
 
-| Settings | Default         | Argument |
-| -------- | --------------- | -------- |
-| Port     | `4000`          | `--port` |
-| Data     | `./mockdata.js` | `--data` |
-| Wait     | `5000`          | `--wait` |
+| Settings | Default | Argument |
+| -------- | ------- | -------- |
+| Port     | `4000`  | `--port` |
+| Data     | `{}`    | `--data` |
+| File     | ''      | `--file` |
+| Wait     | `5000`  | `--wait` |
 
 If you want any other data, you can pass arguments like;
 
 ```
 npm start -- --port=5000 --data=./test.json
 ```
+
+### Inline data
+
+You can use inline json data.
+
+```
+npx ws-launch --data="{}"
+```
+
+Your json needs to be stringified and escaped.
 
 <iframe src="./convert.html"></iframe>
