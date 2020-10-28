@@ -99,10 +99,19 @@ wss.on("connection", function (ws) {
             cli_block_1.BLOCK_LINE_SUCCESS("Send Data", ls);
             ws.send(JSON.stringify(data));
         })
-            .then(function () { return cli_block_1.BLOCK_END(undefined, ls); })
+            .then(function () {
+            if (argv.open)
+                cli_block_1.BLOCK_MID(undefined, ls);
+            else
+                cli_block_1.BLOCK_END(undefined, ls);
+        })
             .then(function () {
             if (!argv.open)
                 process.exit(0);
+        })
+            .then(function () {
+            if (argv.open)
+                cli_block_1.BLOCK_LINE("Waiting for connection....", __assign(__assign({}, ls), { newLine: false }));
         });
     }, argv.wait);
 });

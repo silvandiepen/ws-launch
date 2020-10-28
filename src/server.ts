@@ -93,9 +93,16 @@ wss.on("connection", (ws: any) => {
         BLOCK_LINE_SUCCESS("Send Data", ls);
         ws.send(JSON.stringify(data));
       })
-      .then(() => BLOCK_END(undefined, ls))
+      .then(() => {
+        if (argv.open) BLOCK_MID(undefined, ls);
+        else BLOCK_END(undefined, ls);
+      })
       .then(() => {
         if (!argv.open) process.exit(0);
+      })
+      .then(() => {
+        if (argv.open)
+          BLOCK_LINE("Waiting for connection....", { ...ls, newLine: false });
       });
   }, argv.wait);
 });
