@@ -1,6 +1,6 @@
 {
   "name": "ws-launch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Launch a Web Socket server with data from json",
   "scripts": {
     "start": "node dist/server.js ",
