@@ -32,10 +32,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var yargs = __importStar(require("yargs"));
+var path_1 = require("path");
 var argv = yargs.options({
     port: { type: "number", default: 4000 },
     wait: { type: "number", default: 5000 },
-    data: { type: "string", default: "./mockData.js" },
+    data: { type: "string", default: "./data.js" },
     url: { type: "string", default: "" },
 }).argv;
 var cli_block_1 = require("cli-block");
@@ -46,14 +47,15 @@ var ls = {
 cli_block_1.hello()
     .then(function () { return cli_block_1.START("Web Socket Mock Server", ls); })
     .then(function () { return cli_block_1.BLOCK_START("Settings", ls); })
-    .then(function () { return cli_block_1.BLOCK_SETTINGS(argv, ls); })
+    .then(function () { return cli_block_1.BLOCK_SETTINGS(argv, ls, { exclude: ["_", "$0"] }); })
     .then(function () { return cli_block_1.BLOCK_MID("Data", ls); })
     .then(function () { return cli_block_1.BLOCK_JSON(data, ls); })
     .then(function () { return cli_block_1.BLOCK_MID("Connect", ls); })
     .then(function () {
     return cli_block_1.BLOCK_LINE("Waiting for connection....", __assign(__assign({}, ls), { newLine: false }));
 });
-var data = require(argv.data);
+var dataUrl = path_1.resolve(path_1.join(process.cwd(), argv.data)) || path_1.resolve(path_1.join(__dirname, argv.data));
+var data = require(dataUrl);
 if (!argv.data)
     data = data.test;
 var WebSocketServer = require("ws").Server, wss = new WebSocketServer({ port: argv.port });

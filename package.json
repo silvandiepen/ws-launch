@@ -4,7 +4,8 @@
   "description": "Launch a Web Socket server with data from json",
   "scripts": {
     "start": "node dist/server.js ",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc -w"
   },
   "main": "dist/server.js",
   "bin": "dist/server.js",

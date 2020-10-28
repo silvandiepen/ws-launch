@@ -1,48 +1,5 @@
 {
   "type": "Match",
   "id": 1167689,
-  "update": {
-    "id": 1167689,
-    "homeRotationId": null,
-    "awayRotationId": null,
-    "name": "Giannessi, Alessandro vs Mager, Gianluca",
-    "eventStatus": "Live",
-    "isLive": true,
-    "isIncluded": true,
-    "startDate": "2020-10-27T14:08:00Z",
-    "endDate": null,
-    "marketCount": 20,
-    "awayCompetitor": {
-      "id": 9709,
-      "name": "MAGER, GIANLUCA"
-    },
-    "homeCompetitor": {
-      "id": 15826,
-      "name": "Giannessi, Alessandro"
-    },
-    "eventConditions": null,
-    "sport": {
-      "id": 89,
-      "name": "Tennis"
-    },
-    "tournament": {
-      "id": 5712,
-      "name": "ATP Challenger Marbella, Spain Men Singles"
-    },
-    "category": {
-      "id": 1377,
-      "name": "Challenger"
-    },
-    "eventStats": null,
-    "isBettingStopped": false,
-    "betRadarId": 24134135,
-    "categoryImageName": "International",
-    "isTopPick": false,
-    "seasonID": "25254",
-    "seasonName": "2020 ATP Challenger Marbella, Spain Men Singles",
-    "lastUpdated": 0
-  },
-  "timeToCreate": 4,
-  "timePreTranslations": null,
-  "timeTranslations": null
+  "name": "Test"
 }

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import * as yargs from "yargs";
+import { join, resolve } from "path";
 
 import { Arguments } from "./types";
 
 const argv: Arguments = yargs.options({
   port: { type: "number", default: 4000 },
   wait: { type: "number", default: 5000 },
-  data: { type: "string", default: "./mockData.js" },
+  data: { type: "string", default: "./data.js" },
   url: { type: "string", default: "" },
 }).argv;
 
@@ -32,7 +33,7 @@ const ls = {
 hello()
   .then(() => START("Web Socket Mock Server", ls))
   .then(() => BLOCK_START("Settings", ls))
-  .then(() => BLOCK_SETTINGS(argv, ls))
+  .then(() => BLOCK_SETTINGS(argv, ls, { exclude: ["_", "$0"] }))
   .then(() => BLOCK_MID("Data", ls))
   .then(() => BLOCK_JSON(data, ls))
   .then(() => BLOCK_MID("Connect", ls))
@@ -40,7 +41,10 @@ hello()
     BLOCK_LINE("Waiting for connection....", { ...ls, newLine: false })
   );
 
-let data = require(argv.data);
+
+const dataUrl = resolve(join(process.cwd(),argv.data)) || resolve(join(__dirname,argv.data);
+
+let data = require(dataUrl);
 if (!argv.data) data = data.test;
 
 var WebSocketServer = require("ws").Server,
