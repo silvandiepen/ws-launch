@@ -5,4 +5,5 @@ export interface Arguments {
   data: string;
   url: string;
   file: string;
+  open: boolean;
 }

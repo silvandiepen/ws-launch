@@ -24,12 +24,13 @@ npx ws-launch
 
 ### Settings
 
-| Settings | Default | Argument |
-| -------- | ------- | -------- |
-| Port     | `4000`  | `--port` |
-| Data     | `{}`    | `--data` |
-| File     | ''      | `--file` |
-| Wait     | `5000`  | `--wait` |
+| Settings | Default | Argument | Description                 |
+| -------- | ------- | -------- | --------------------------- |
+| Port     | `4000`  | `--port` | On which port should it run |
+| Data     | `{}`    | `--data` | Json string with data       |
+| File     | ''      | `--file` | Json file with data         |
+| Wait     | `5000`  | `--wait` | Wait in ms to fire the data |
+| Open     | false   | `--open` | Keep the connection open    |
 
 If you want any other data, you can pass arguments like;
 

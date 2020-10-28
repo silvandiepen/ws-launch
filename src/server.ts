@@ -10,6 +10,7 @@ const argv: Arguments = yargs.options({
   data: { type: "string", default: "" },
   file: { type: "string", default: "" },
   url: { type: "string", default: "" },
+  open: { type: "boolean", default: false },
 }).argv;
 
 import {
@@ -93,6 +94,8 @@ wss.on("connection", (ws: any) => {
         ws.send(JSON.stringify(data));
       })
       .then(() => BLOCK_END(undefined, ls))
-      .then(() => process.exit(0));
+      .then(() => {
+        if (!argv.open) process.exit(0);
+      });
   }, argv.wait);
 });

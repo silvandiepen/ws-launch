@@ -39,6 +39,7 @@ var argv = yargs.options({
     data: { type: "string", default: "" },
     file: { type: "string", default: "" },
     url: { type: "string", default: "" },
+    open: { type: "boolean", default: false },
 }).argv;
 var cli_block_1 = require("cli-block");
 argv.url = "http://localhost:" + argv.port;
@@ -99,6 +100,9 @@ wss.on("connection", function (ws) {
             ws.send(JSON.stringify(data));
         })
             .then(function () { return cli_block_1.BLOCK_END(undefined, ls); })
-            .then(function () { return process.exit(0); });
+            .then(function () {
+            if (!argv.open)
+                process.exit(0);
+        });
     }, argv.wait);
 });
