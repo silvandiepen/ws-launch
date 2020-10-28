@@ -47,4 +47,4 @@ npx ws-launch --data="{}"
 
 Your json needs to be stringified and escaped.
 
-<iframe src="./convert.html"></iframe>
+<iframe src="docs/convert.html" style="width: 100%; height: 50vh; min-height: 320px; border: none;"></iframe>
