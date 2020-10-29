@@ -3,7 +3,7 @@
 A Web Socket Mock data launcher
 
 <div style="max-width: 100%; width: 480px; margin: auto;">
-![screenshot](/docs/assets/terminal.png)
+    <img alt="screenshot" src="/docs/assets/terminal.png" />
 </div>
 
 ### Installation
