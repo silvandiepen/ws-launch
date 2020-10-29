@@ -2,7 +2,9 @@
 
 A Web Socket Mock data launcher
 
-![screenshot](docs/assets/terminal.png)
+<div style="max-width: 100%; width: 480px; margin: auto;">
+![screenshot](/docs/assets/terminal.png)
+</div>
 
 ### Installation
 
