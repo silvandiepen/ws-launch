@@ -2,9 +2,11 @@
 
 A Web Socket Mock data launcher
 
+![screenshot](https://pasteboard.co/JxRG07L.png)
+
 ### Installation
 
-To start the project,
+To start the project;
 
 ```
 npm install
