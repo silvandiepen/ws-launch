@@ -2,7 +2,7 @@
 
 A Web Socket Mock data launcher
 
-![screenshot](https://pasteboard.co/JxRG07L.png)
+![screenshot](docs/assets/terminal.png)
 
 ### Installation
 
